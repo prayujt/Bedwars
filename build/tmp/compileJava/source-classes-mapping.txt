@@ -1,0 +1,4 @@
+bedwars/StartCommand.java
+ bedwars.StartCommand
+bedwars/PluginCore.java
+ bedwars.PluginCore

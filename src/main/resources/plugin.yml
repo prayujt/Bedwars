@@ -1,0 +1,12 @@
+name: BedWars
+version: 1.16.5
+api-version: 1.16
+description: Bed Wars Plugin
+author: Prayuj Tuli
+
+main: bedwars.PluginCore
+
+commands:
+    start:
+        description: Start Game
+        usage: /start
