@@ -19,10 +19,11 @@ public class StartCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        ArrayList<String> colors = new ArrayList<String>(List.of("Yellow", "Red"));
+        ArrayList<String> colors = new ArrayList<String>(List.of("Yellow", "Red", "White"));
         Hashtable<String, ArrayList<Integer>> bases = new Hashtable<String, ArrayList<Integer>>();
         bases.put("Yellow", new ArrayList<Integer>(List.of(75, 66, 32)));
         bases.put("Red", new ArrayList<Integer>(List.of(-33, 66, -73)));
+        bases.put("White", new ArrayList<Integer>(List.of(31, 66, 74)));
         if (args.length != 1) {
             sender.sendMessage("Not correct number of arguments!");
             return false;
@@ -51,6 +52,7 @@ public class StartCommand implements CommandExecutor {
             for (Player p: teams.get(i)) {
                 Location base_coordinates = new Location(p.getWorld(), x, y, z);
                 p.teleport(base_coordinates);
+                p.setBedSpawnLocation(base_coords, true);
             }    
         }    
 
