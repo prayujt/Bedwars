@@ -1,4 +1,14 @@
-bedwars/StartCommand.java
- bedwars.StartCommand
+bedwars/commands/StartCommand.java
+ bedwars.commands.StartCommand
+bedwars/listeners/JoinEventListener.java
+ bedwars.listeners.JoinEventListener
+bedwars/Game.java
+ bedwars.Game
+bedwars/BedwarsPlayer.java
+ bedwars.BedwarsPlayer
+bedwars/listeners/QuitEventListener.java
+ bedwars.listeners.QuitEventListener
+bedwars/listeners/RespawnEventListener.java
+ bedwars.listeners.RespawnEventListener
 bedwars/PluginCore.java
  bedwars.PluginCore
