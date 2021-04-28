@@ -21,7 +21,6 @@ public class StartCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        ArrayList<String> colors = new ArrayList<String>(List.of("Yellow", "Red", "White"));
         Hashtable<String, ArrayList<Integer>> bases = new Hashtable<String, ArrayList<Integer>>();
         bases.put("Yellow", new ArrayList<Integer>(List.of(75, 66, 32)));
         bases.put("Red", new ArrayList<Integer>(List.of(-33, 66, -73)));
@@ -48,9 +47,9 @@ public class StartCommand implements CommandExecutor {
 
         // Teleport each player on each team to respective bases
         for (int i = 0; i < teams.size(); i += 1) {
-            int x = bases.get(colors.get(i)).get(0);
-            int y = bases.get(colors.get(i)).get(1);
-            int z = bases.get(colors.get(i)).get(2);
+            int x = bases.get(Game.colors.get(i)).get(0);
+            int y = bases.get(Game.colors.get(i)).get(1);
+            int z = bases.get(Game.colors.get(i)).get(2);
             for (Player p: teams.get(i)) {
                 p.teleport(new Location(Bukkit.getWorld("world"), x, y, z));
                 Game.addPlayer(p.getName(), i, x, y, z);

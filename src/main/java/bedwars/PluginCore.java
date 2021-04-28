@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import java.util.HashMap;
 
+import bedwars.commands.ResetCommand;
 import bedwars.commands.StartCommand;
 import bedwars.listeners.JoinEventListener;
 import bedwars.listeners.QuitEventListener;
@@ -17,6 +18,7 @@ public class PluginCore extends JavaPlugin {
     public void onEnable(){
         // Fired when server plugin is first enabled
         this.getCommand("start").setExecutor(new StartCommand());
+        this.getCommand("reset").setExecutor(new ResetCommand());
         RespawnEventListener spawnListener = new RespawnEventListener(this);
         JoinEventListener joinListener = new JoinEventListener(this);
         QuitEventListener quitListener = new QuitEventListener(this);

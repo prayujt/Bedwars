@@ -10,3 +10,6 @@ commands:
     start:
         description: Start Game
         usage: /start
+    reset:
+        description: Restart Game
+        usage: /reset
