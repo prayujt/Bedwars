@@ -17,5 +17,6 @@ public class JoinEventListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         System.out.println("Player joined! " + event.getPlayer().getName());
         Game.onlinePlayers.add(event.getPlayer());
+        System.out.println(Game.onlinePlayers.toString());
     }
 }

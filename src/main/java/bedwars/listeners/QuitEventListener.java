@@ -6,6 +6,9 @@ import bedwars.Game;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+
+import java.util.Iterator;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -16,10 +19,11 @@ public class QuitEventListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         System.out.println("Player quit! " + event.getPlayer().getName());
-        for (Player player: Game.onlinePlayers) {
-            if (player.getName().equals(event.getPlayer().getName())) {
-                Game.onlinePlayers.remove(player);
-            }    
-        }    
+        Iterator<Player> iter = Game.onlinePlayers.iterator();
+        while (iter.hasNext()) {
+            Player player = iter.next();
+            if (player.getName().equals(event.getPlayer().getName())) iter.remove();
+        }
+        System.out.println(Game.onlinePlayers.toString());
     }
 }
