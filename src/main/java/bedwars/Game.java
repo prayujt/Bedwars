@@ -11,7 +11,6 @@ public class Game {
 
     public static void addPlayer(String name, int team, int x, int y, int z) {
         BedwarsPlayer bp = new BedwarsPlayer(name, team, x, y, z);
-        bp.respawn();
         if (teams.containsKey(team)) {
             ArrayList<BedwarsPlayer> newTeam = teams.get(team);
             newTeam.add(bp);
