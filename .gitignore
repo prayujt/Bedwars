@@ -26,3 +26,4 @@ build.gradle
 gradle/
 gradlew
 settings.gradle
+.settings/
