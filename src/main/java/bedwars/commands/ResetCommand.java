@@ -16,6 +16,9 @@ import bedwars.BedwarsPlayer;
 import bedwars.Game;
 
 import java.util.*;
+import org.apache.commons.io.FileUtils;
+import java.io.File;
+import java.io.IOException;
 
 public class ResetCommand implements CommandExecutor {
     public ResetCommand() {}
@@ -26,9 +29,21 @@ public class ResetCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Game.teams = new Hashtable<Integer, ArrayList<BedwarsPlayer>>();
         Game.beds = new Hashtable<Integer, Boolean>();
+
+        File template = new File(Bukkit.getWorldContainer(), "bedwars_template");
+        File destination = new File(Bukkit.getWorldContainer(), "bedwars1");
+        try {
+            FileUtils.copyDirectory(template, destination);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        WorldCreator wc = new WorldCreator("bedwars1");
+        wc.createWorld();
+
         for (Player player: Game.onlinePlayers) {
             player.setGameMode(GameMode.SURVIVAL);
-            player.teleport(new Location(Game.getWorld(), 0, 118, 0));
+            player.teleport(new Location(Bukkit.getWorld("bedwars1"), 0, 118, 0));
         }
         Bukkit.broadcastMessage("Returned to lobby!");
         return true;

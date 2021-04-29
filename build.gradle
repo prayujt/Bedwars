@@ -12,5 +12,11 @@ repositories {
 dependencies {
     implementation 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
     implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'commons-io:commons-io:2.8.0'
 }
 
+jar {
+    from {
+        configurations.runtimeClasspath.findAll().collect { zipTree(it) }
+    }
+}
