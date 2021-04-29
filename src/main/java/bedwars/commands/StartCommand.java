@@ -1,5 +1,4 @@
 package bedwars.commands;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -54,7 +53,9 @@ public class StartCommand implements CommandExecutor {
                 p.teleport(new Location(Bukkit.getWorld("world"), x, y, z));
                 Game.addPlayer(p.getName(), i, x, y, z);
             }    
-        }    
+        }
+
+        Game.startGame();
 
         return true;
     }    
