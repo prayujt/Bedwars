@@ -1,5 +1,6 @@
 package bedwars;
 
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -46,6 +47,15 @@ public class Game {
     }
 
     public static boolean checkBed(int team) {
-        return beds.get(team);
+        try {
+            return beds.get(team);
+        } catch (NullPointerException e) {
+            return true;
+        }
     }    
+
+    public static World getWorld() {
+        return onlinePlayers.get(0).getWorld();
+    }    
+
 }    

@@ -20,6 +20,7 @@ public class RespawnEventListener implements Listener {
     public void onRespawn(PlayerRespawnEvent event) {
         BedwarsPlayer player = Game.getPlayer(event.getPlayer());
         if (player.inGame == true && !(Game.checkBed(player.team))) event.getPlayer().setGameMode(GameMode.SPECTATOR);
-        event.setRespawnLocation(new Location(Bukkit.getWorld("world"), player.spawnX, player.spawnY, player.spawnZ));
+        event.setRespawnLocation(new Location(event.getPlayer().getWorld(), player.spawnX, player.spawnY, player.spawnZ));
+        System.out.println(event.getPlayer().getWorld());
     }
 }

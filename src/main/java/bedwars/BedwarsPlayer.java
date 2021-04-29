@@ -25,7 +25,7 @@ public class BedwarsPlayer {
     }    
 
     public void teleport(int x, int y, int z) {
-        getPlayer().teleport(new Location(Bukkit.getWorld("world"), x, y, z));
+        getPlayer().teleport(new Location(Game.getWorld(), x, y, z));
     }    
 
     public Player getPlayer() {

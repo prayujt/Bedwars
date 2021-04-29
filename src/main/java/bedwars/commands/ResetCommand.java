@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.Location;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,8 +28,8 @@ public class ResetCommand implements CommandExecutor {
         Game.beds = new Hashtable<Integer, Boolean>();
         for (Player player: Game.onlinePlayers) {
             player.setGameMode(GameMode.SURVIVAL);
-            player.teleport(new Location(Bukkit.getWorld("world"), 0, 118, 0));
-        }    
+            player.teleport(new Location(Game.getWorld(), 0, 118, 0));
+        }
         Bukkit.broadcastMessage("Returned to lobby!");
         return true;
     }    

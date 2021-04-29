@@ -50,7 +50,7 @@ public class StartCommand implements CommandExecutor {
             int y = bases.get(Game.colors.get(i)).get(1);
             int z = bases.get(Game.colors.get(i)).get(2);
             for (Player p: teams.get(i)) {
-                p.teleport(new Location(Bukkit.getWorld("world"), x, y, z));
+                p.teleport(new Location(Game.getWorld(), x, y, z));
                 Game.addPlayer(p.getName(), i, x, y, z);
             }    
         }
