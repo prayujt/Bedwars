@@ -18,13 +18,11 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# custom ignores
-.git
-.gradle
-gradlew
-gradlew.bat
-settings.gradle
+bin/
+.git/
+.gradle/
+build/
 build.gradle
-build
-bin
-
+gradle/
+gradlew
+settings.gradle
