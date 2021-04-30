@@ -22,7 +22,6 @@ bin/
 .git/
 .gradle/
 build/
-build.gradle
 gradle/
 gradlew
 settings.gradle
