@@ -12,15 +12,31 @@ public class Game {
     public static Hashtable<Integer, ArrayList<BedwarsPlayer>> teams = new Hashtable<Integer, ArrayList<BedwarsPlayer>>();
     public static Hashtable<Integer, Boolean> beds = new Hashtable<Integer, Boolean>();
 
-    public static Hashtable<Integer, ArrayList<Integer>> baseSpawners = new Hashtable<Integer, ArrayList<Integer>>();
-    public static Hashtable<Integer, ArrayList<Integer>> diamondSpawners = new Hashtable<Integer, ArrayList<Integer>>();
-    public static Hashtable<Integer, ArrayList<Integer>> emeraldSpawners = new Hashtable<Integer, ArrayList<Integer>>();
+    public static ArrayList<ArrayList<Double>> baseSpawners = new ArrayList<ArrayList<Double>>();
+    public static ArrayList<ArrayList<Double>> diamondSpawners = new ArrayList<ArrayList<Double>>(List.of(
+                new ArrayList<Double>(List.of(-52.0, 65.0, 1.0)),
+                new ArrayList<Double>(List.of(1.0, 65.0, -52.0)),
+                new ArrayList<Double>(List.of(1.0, 65.0, 52.0)),
+                new ArrayList<Double>(List.of(52.0, 65.0, 1.0))
+            ));
+    public static ArrayList<ArrayList<Double>> emeraldSpawners = new ArrayList<ArrayList<Double>>(List.of(
+                new ArrayList<Double>(List.of(-11.5, 79.0, 12.5)),
+                new ArrayList<Double>(List.of(12.5, 79.0, 12.5)),
+                new ArrayList<Double>(List.of(12.0, 79.0, -11.5)),
+                new ArrayList<Double>(List.of(-11.5, 79.0, -11.5))
+            ));
 
     public static boolean inGame = false;
     public static int currentGame = 1;
 
     public static void startGame() {
         Game.inGame = true;            
+        for (ArrayList<Double> coordinates: diamondSpawners) {
+            Spawner spawner = new Spawner(1, coordinates);
+        }
+        for (ArrayList<Double> coordinates: emeraldSpawners) {
+            Spawner spawner = new Spawner(2, coordinates);
+        }
     }    
 
     public static void addPlayer(String name, int team, int x, int y, int z) {
