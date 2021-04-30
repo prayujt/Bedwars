@@ -17,6 +17,7 @@ public class Game {
     public static Hashtable<Integer, ArrayList<Integer>> emeraldSpawners = new Hashtable<Integer, ArrayList<Integer>>();
 
     public static boolean inGame = false;
+    public static int currentGame = 1;
 
     public static void startGame() {
         Game.inGame = true;            

@@ -29,23 +29,39 @@ public class ResetCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Game.teams = new Hashtable<Integer, ArrayList<BedwarsPlayer>>();
         Game.beds = new Hashtable<Integer, Boolean>();
+        String newWorld = "world" + Integer.toString(Game.currentGame);
 
         File template = new File(Bukkit.getWorldContainer(), "bedwars_template");
-        File destination = new File(Bukkit.getWorldContainer(), "bedwars1");
+        File destination = new File(Bukkit.getWorldContainer(), newWorld);
         try {
             FileUtils.copyDirectory(template, destination);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        File delete = new File(Bukkit.getWorldContainer().getPath() + "/" + newWorld + "/", "uid.dat");
+        delete.delete();
 
-        WorldCreator wc = new WorldCreator("bedwars1");
+        WorldCreator wc = new WorldCreator(newWorld);
         wc.createWorld();
+
+        String world = Game.getWorld().getName();
 
         for (Player player: Game.onlinePlayers) {
             player.setGameMode(GameMode.SURVIVAL);
-            player.teleport(new Location(Bukkit.getWorld("bedwars1"), 0, 118, 0));
+            player.teleport(new Location(Bukkit.getWorld(newWorld), 0, 118, 0));
         }
         Bukkit.broadcastMessage("Returned to lobby!");
+
+        File deleteFolder = new File(Bukkit.getWorldContainer(), world);
+        System.out.println("Deleting: " + deleteFolder.getPath());
+        try {
+            FileUtils.deleteDirectory(deleteFolder);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Game.currentGame += 1;
         return true;
     }    
 }    
