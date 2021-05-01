@@ -1,12 +1,14 @@
 package bedwars.commands;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.World;
 import org.bukkit.Location;
-
+import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
 import bedwars.Game;
@@ -21,9 +23,11 @@ public class StartCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Hashtable<String, ArrayList<Integer>> bases = new Hashtable<String, ArrayList<Integer>>();
-        bases.put("Yellow", new ArrayList<Integer>(List.of(75, 66, 32)));
-        bases.put("Red", new ArrayList<Integer>(List.of(-33, 66, -73)));
-        bases.put("White", new ArrayList<Integer>(List.of(-31, 66, 74)));
+        bases.put("Green", new ArrayList<Integer>(List.of(74, 66, -34)));
+        bases.put("Red", new ArrayList<Integer>(List.of(-34, 66, -72)));
+        bases.put("Pink", new ArrayList<Integer>(List.of(-74, 66, 34)));
+        bases.put("Cyan", new ArrayList<Integer>(List.of(34, 66, 74)));
+
         if (args.length != 1) {
             sender.sendMessage("Not correct number of arguments!");
             return false;
@@ -51,6 +55,9 @@ public class StartCommand implements CommandExecutor {
             int z = bases.get(Game.colors.get(i)).get(2);
             for (Player p: teams.get(i)) {
                 p.teleport(new Location(Game.getWorld(), x, y, z));
+                p.setGameMode(GameMode.SURVIVAL);
+                p.getInventory().clear();
+                p.getInventory().addItem(new ItemStack(Material.WOODEN_SWORD));
                 Game.addPlayer(p.getName(), i, x, y, z);
             }    
         }

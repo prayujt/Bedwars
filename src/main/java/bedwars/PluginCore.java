@@ -12,6 +12,7 @@ import bedwars.listeners.BlockBreakEventListener;
 import bedwars.listeners.JoinEventListener;
 import bedwars.listeners.QuitEventListener;
 import bedwars.listeners.RespawnEventListener;
+import bedwars.listeners.VillagerInteractionEventListener;
 
 public class PluginCore extends JavaPlugin {
 
@@ -24,6 +25,7 @@ public class PluginCore extends JavaPlugin {
         JoinEventListener joinListener = new JoinEventListener(this);
         QuitEventListener quitListener = new QuitEventListener(this);
         BlockBreakEventListener blockBreakListener = new BlockBreakEventListener(this);
+        VillagerInteractionEventListener villagerListener = new VillagerInteractionEventListener(this);
     }
 
     @Override

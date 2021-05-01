@@ -49,6 +49,7 @@ public class ResetCommand implements CommandExecutor {
         for (Player player: Game.onlinePlayers) {
             player.setGameMode(GameMode.SURVIVAL);
             player.teleport(new Location(Bukkit.getWorld(newWorld), 0, 118, 0));
+            player.getInventory().clear();
         }
         Bukkit.broadcastMessage("Returned to lobby!");
 
