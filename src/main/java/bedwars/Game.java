@@ -64,7 +64,6 @@ public class Game {
 
     public static void startGame() {
         Game.inGame = true;            
-        Trades.initializeTrades();
 
         for (ArrayList<Double> coordinates: baseSpawners) {
             Spawner spawner = new Spawner(0, coordinates);
@@ -81,10 +80,8 @@ public class Game {
             Location teamUpgradesLocation = new Location(Game.getWorld(), upgradeShops.get(i).get(0), upgradeShops.get(i).get(1), upgradeShops.get(i).get(2));
             Villager itemShop = (Villager) Game.getWorld().spawnEntity(itemShopLocation, EntityType.VILLAGER);
             itemShop.setCustomName("Item Shop");
-//            itemShop.setRecipes(Trades.itemRecipes);
             Villager upgradeShop = (Villager) Game.getWorld().spawnEntity(teamUpgradesLocation, EntityType.VILLAGER);
             upgradeShop.setCustomName("Team Upgrades");
-//            upgradeShop.setRecipes(Trades.upgradeRecipes);
         }
     }    
 
