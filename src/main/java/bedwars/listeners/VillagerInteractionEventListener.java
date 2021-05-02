@@ -2,6 +2,8 @@ package bedwars.listeners;
 
 import bedwars.BedwarsPlayer;
 import bedwars.PluginCore;
+import bedwars.Trade;
+import bedwars.Trades;
 import bedwars.Game;
 
 import org.bukkit.event.EventHandler;
@@ -34,9 +36,11 @@ public class VillagerInteractionEventListener implements Listener {
                 // Wool
                 addShopItem(inventory, 0, "Wool", getWool(player), 16);
 
-                // Fireball
-                addShopItem(inventory, 1, "Fireball", Material.FIRE_CHARGE, 1);
-
+                int i = 1;
+                for (Trade trade: Trades.trades) {
+                    addShopItem(inventory, i, trade.name, trade.get, trade.getAmount);
+                    i++;
+                }
 
                 player.openInventory(inventory);
             }
@@ -55,8 +59,9 @@ public class VillagerInteractionEventListener implements Listener {
             if (item.getType() == wool) {
                 trade(player, Material.IRON_INGOT, 4, wool, 16);
             }
-            else if (item.getType() == Material.FIRE_CHARGE) {
-                trade(player, Material.IRON_INGOT, 4, Material.FIRE_CHARGE, 1);
+            else {
+                Trade trade = Trades.getTrade(item.getType());
+                trade(player, trade.give, trade.giveAmount, trade.get, trade.getAmount);
             }
         }
     }
@@ -72,9 +77,9 @@ public class VillagerInteractionEventListener implements Listener {
     public Material getWool(Player player) {
         switch (Game.getPlayer(player).team) {
             case 0:
-                return Material.GREEN_WOOL;                
+                return Material.GREEN_WOOL;
             case 1:
-                return Material.RED_WOOL;                
+                return Material.RED_WOOL;
             case 2:
                 return Material.PINK_WOOL;
             case 3:
