@@ -9,6 +9,7 @@ import java.util.HashMap;
 import bedwars.commands.ResetCommand;
 import bedwars.commands.StartCommand;
 import bedwars.listeners.BlockBreakEventListener;
+import bedwars.listeners.FireballEventListener;
 import bedwars.listeners.JoinEventListener;
 import bedwars.listeners.QuitEventListener;
 import bedwars.listeners.RespawnEventListener;
@@ -26,6 +27,7 @@ public class PluginCore extends JavaPlugin {
         QuitEventListener quitListener = new QuitEventListener(this);
         BlockBreakEventListener blockBreakListener = new BlockBreakEventListener(this);
         VillagerInteractionEventListener villagerListener = new VillagerInteractionEventListener(this);
+        FireballEventListener fireballListener = new FireballEventListener(this);
     }
 
     @Override

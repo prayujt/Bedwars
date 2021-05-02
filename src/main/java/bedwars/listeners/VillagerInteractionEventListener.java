@@ -13,7 +13,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
-import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -31,12 +30,14 @@ public class VillagerInteractionEventListener implements Listener {
             Villager villager = (Villager) event.getRightClicked();
             if(villager.getCustomName().equalsIgnoreCase("Item Shop")) {
                 Inventory inventory = Bukkit.createInventory(null, 27, "Item Shop");
-                ItemStack wool = new ItemStack(getWool(player), 16);
-                ItemMeta meta = wool.getItemMeta();
-                meta.setDisplayName("Wool");
-                wool.setItemMeta(meta);
-                inventory.setItem(0, wool);
-                
+
+                // Wool
+                addShopItem(inventory, 0, "Wool", getWool(player), 16);
+
+                // Fireball
+                addShopItem(inventory, 1, "Fireball", Material.FIRE_CHARGE, 1);
+
+
                 player.openInventory(inventory);
             }
         }
@@ -54,13 +55,18 @@ public class VillagerInteractionEventListener implements Listener {
             if (item.getType() == wool) {
                 trade(player, Material.IRON_INGOT, 4, wool, 16);
             }
-            else {
-//                switch (item.getType()) {
-//                    default:
-//
-//                }
+            else if (item.getType() == Material.FIRE_CHARGE) {
+                trade(player, Material.IRON_INGOT, 4, Material.FIRE_CHARGE, 1);
             }
         }
+    }
+
+    public void addShopItem(Inventory inventory, int position, String name, Material material, int quantity) {
+            ItemStack item = new ItemStack(material, quantity);
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(name);
+            item.setItemMeta(meta);
+            inventory.setItem(position, item);
     }
 
     public Material getWool(Player player) {
