@@ -23,10 +23,12 @@ public class FireballEventListener implements Listener {
 
         if (player.getItemInHand().getType() == Material.FIRE_CHARGE) {
             event.setCancelled(true);
-            Fireball fireball = player.getWorld().spawn(event.getPlayer().getLocation().add(new Vector(0.0D, 2.0D, 0.0D)), Fireball.class);
+            Fireball fireball = player.getWorld().spawn(player.getLocation().add(new Vector(0.0D, 2.0D, 0.0D)), Fireball.class);
             fireball.setBounce(true);
             fireball.setShooter(player);
             fireball.setYield(2.0f);
+            
+            VillagerInteractionEventListener.removeItems(player.getInventory(), Material.FIRE_CHARGE, 1);
         }
     }
 }
