@@ -20,8 +20,4 @@ hs_err_pid*
 
 bin/
 .git/
-.gradle/
 build/
-gradle/
-gradlew
-settings.gradle
