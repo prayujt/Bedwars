@@ -32,14 +32,14 @@ public class Spawner {
                 ItemStack stack = new ItemStack(Material.IRON_INGOT);
                 Game.getWorld().dropItem(location, stack);
             }
-        }, 10L, 30L);
+        }, 10L, 25L);
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("Bedwars"), new Runnable(){
             public void run() {
                 Location location = new Location(Game.getWorld(), coordinates.get(0), coordinates.get(1), coordinates.get(2));
                 ItemStack stack = new ItemStack(Material.GOLD_INGOT);
                 Game.getWorld().dropItem(location, stack);
             }
-        }, 10L, 100L);
+        }, 10L, 80L);
 
     }
 
