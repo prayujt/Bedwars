@@ -9,10 +9,15 @@ import bedwars.Game;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -34,11 +39,11 @@ public class VillagerInteractionEventListener implements Listener {
                 Inventory inventory = Bukkit.createInventory(null, 27, "Item Shop");
 
                 // Wool
-                addShopItem(inventory, 0, "Wool", getWool(player), 16);
+                addShopItem(inventory, 0, "Wool", getWool(player), 16, new HashMap<Enchantment, Integer>());
 
                 int i = 1;
                 for (Trade trade: Trades.trades) {
-                    addShopItem(inventory, i, trade.name, trade.get, trade.getAmount);
+                    addShopItem(inventory, i, trade.name, trade.get, trade.getAmount, trade.enchantments);
                     i++;
                 }
 
@@ -57,17 +62,18 @@ public class VillagerInteractionEventListener implements Listener {
         if (name.equals("Item Shop")) {
             event.setCancelled(true);
             if (item.getType() == wool) {
-                trade(player, Material.IRON_INGOT, 4, wool, 16);
+                trade(player, Material.IRON_INGOT, 4, wool, 16, new HashMap<Enchantment, Integer>());
             }
             else {
-                Trade trade = Trades.getTrade(item.getType());
-                trade(player, trade.give, trade.giveAmount, trade.get, trade.getAmount);
+                Trade trade = Trades.getTrade(item.getItemMeta().getDisplayName());
+                trade(player, trade.give, trade.giveAmount, trade.get, trade.getAmount, trade.enchantments);
             }
         }
     }
 
-    public void addShopItem(Inventory inventory, int position, String name, Material material, int quantity) {
+    public void addShopItem(Inventory inventory, int position, String name, Material material, int quantity, Map<Enchantment, Integer> enchantments) {
             ItemStack item = new ItemStack(material, quantity);
+            item.addEnchantments(enchantments);
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(name);
             item.setItemMeta(meta);
@@ -89,10 +95,12 @@ public class VillagerInteractionEventListener implements Listener {
         }
     }
 
-    public void trade(Player player, Material give, int giveAmount, Material get, int getAmount) {
+    public void trade(Player player, Material give, int giveAmount, Material get, int getAmount, Map<Enchantment, Integer> enchantments) {
         if (player.getInventory().contains(give, giveAmount)) {
             removeItems(player.getInventory(), give, giveAmount);
-            player.getInventory().addItem(new ItemStack(get, getAmount));
+            ItemStack items = new ItemStack(get, getAmount);
+            items.addEnchantments(enchantments);
+            player.getInventory().addItem(items);
         }
         else player.sendMessage("Not enough!");
     }
