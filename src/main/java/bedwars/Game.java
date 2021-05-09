@@ -10,7 +10,7 @@ import org.bukkit.Location;
 import java.util.*;
 
 public class Game {
-    public static ArrayList<String> colors = new ArrayList<String>(List.of("Green", "Red", "Pink", "Cyan"));
+    public static ArrayList<String> colors = new ArrayList<String>(List.of("Green", "Red", "Pink", "Cyan", "Blue"));
     public static ArrayList<Player> onlinePlayers = new ArrayList<Player>();
 
     public static Hashtable<Integer, ArrayList<BedwarsPlayer>> teams = new Hashtable<Integer, ArrayList<BedwarsPlayer>>();

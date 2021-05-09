@@ -27,6 +27,7 @@ public class StartCommand implements CommandExecutor {
         bases.put("Red", new ArrayList<Integer>(List.of(-34, 66, -72)));
         bases.put("Pink", new ArrayList<Integer>(List.of(-74, 66, 34)));
         bases.put("Cyan", new ArrayList<Integer>(List.of(34, 66, 74)));
+        bases.put("Blue", new ArrayList<Integer>(List.of(31, 66, -72)));
 
         if (args.length != 1) {
             sender.sendMessage("Not correct number of arguments!");
